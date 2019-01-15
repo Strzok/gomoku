@@ -1,0 +1,344 @@
+<html>
+    <head>
+        <title>Tablica przyciskow</title>
+    <script type="text/javascript">
+size = 15;
+
+    </script>
+<style>
+.dropbtn {
+    background-color: #f1f1f1;
+    color: black;
+    padding: 15px;
+    font-size: 15px;
+    min-width: 160px;
+    border: none;
+    cursor: pointer;
+}
+
+.dropbtn:hover, .dropbtn:focus {
+    background-color:  #f1f1f1;
+}
+
+.dropdown {
+    position: relative;
+    display: inline-block;
+}
+
+.dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #f1f1f1;
+    min-width: 160px;
+    overflow: auto;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 1;
+}
+
+.dropdown-content a {
+    color: black;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+}
+
+.dropdown a:hover {background-color: #ddd;}
+
+.show {display: block;}
+</style>
+    </head>
+
+    <body>
+        <p>Witaj</p>
+   </br>
+<p id="content">{{content}}</p>
+<p id=komunikat>{{komunikat}}</p>
+
+    <input
+
+      type="button" 
+      class="dropbtn"
+
+      value="Nowa gra"
+
+      onclick="location.assign(0);sessionStorage.clear()"
+      
+    />
+
+
+ <div class="dropdown">
+  <button onclick="myFunction()" class="dropbtn">Poziom trudnosci</button>
+  <div id="myDropdown" class="dropdown-content">
+    <button onclick="location.assign(0.1)"class="dropbtn">Bardzo latwy</button>
+    <button onclick="location.assign(0.2)"class="dropbtn">Latwy</button>
+    <button onclick="location.assign(0.3)"class="dropbtn">Sredni</button>
+    <button onclick="location.assign(0.4)"class="dropbtn">Trudny</button>    
+  </div>
+</div> 
+
+
+<!-- <div class="dropdown">
+  <button onclick="sizeFunction()" class="dropbtn">Wielkosc planszy</button>
+  <div id="sizeDropdown" class="dropdown-content">
+   <button onclick="sizeF()"class="dropbtn">10</button>
+   <button onclick="location.assign('size15');sessionStorage.clear()"class="dropbtn">15</button>
+   <button onclick="location.assign('size20');sessionStorage.clear()"class="dropbtn">20</button>
+   <button onclick="location.assign('size25');sessionStorage.clear()"class="dropbtn">25</button>    
+  </div>
+</div> 
+-->
+
+
+</br>
+</br>
+</br>
+
+<canvas id="plansza" width="1250" height="1250"></canvas>
+
+<script>
+
+
+function myFunction() {
+    document.getElementById("myDropdown").classList.toggle("show");
+}
+function sizeFunction() {
+    document.getElementById("sizeDropdown").classList.toggle("show");
+    
+}
+
+
+
+
+
+
+// Close the dropdown if the user clicks outside of it
+window.onclick = function(event) {
+  if (!event.target.matches('.dropbtn')) {
+
+    var dropdowns = document.getElementsByClassName("dropdown-content");
+    var i;
+    for (i = 0; i < dropdowns.length; i++) {
+      var openDropdown = dropdowns[i];
+      if (openDropdown.classList.contains('show')) {
+        openDropdown.classList.remove('show');
+      }
+    }
+  }
+}
+
+function sizeF() {
+
+  location.assign('size10');
+  sessionStorage.clear();
+  size = 15;
+  
+}
+
+var canvas = document.getElementById("plansza");
+var ctx = canvas.getContext("2d");
+
+
+var height = document.getElementById("plansza").clientHeight;
+var width = document.getElementById("plansza").clientWidth;
+
+ctx.beginPath();
+ctx.rect(0,0,size*50,size*50);
+ ctx.lineWidth=3;
+ctx.stroke();
+
+var a = 0;
+for (i=0; i<(size-1) ; i++){
+var a = a + 50;
+ctx.beginPath();
+ctx.moveTo(0,a);
+ctx.lineTo(size*50,a);
+ctx.strokeStyle="green";
+ctx.stroke();
+}
+
+var b = 0;
+for (i=0; i<(size-1); i++){
+var b = b + 50;
+ctx.beginPath();
+ctx.moveTo(b,0);
+ctx.lineTo(b,size*50);
+ctx.strokeStyle="green";
+ctx.stroke();
+}
+
+
+
+
+var players_turn_x;
+var players_turn_y;
+
+if ("players_turn_x" in sessionStorage){//rysuje krzyzyki postawione wczesniej
+  var retrievedData_x = sessionStorage.getItem("players_turn_x");
+  players_turn_x = JSON.parse(retrievedData_x);
+  var m = players_turn_x.length;
+  
+  var retrievedData_y = sessionStorage.getItem("players_turn_y");
+  players_turn_y = JSON.parse(retrievedData_y);
+  var n = players_turn_y.length;
+  for (i = 0; i < m; i++){
+    //for (j = 0; j < n; j++){
+      var jx = players_turn_x[i];
+      var jy = players_turn_y[i];
+      ctx.beginPath();
+      ctx.moveTo(jx*50-50,jy*50);
+      ctx.lineTo(jx*50,jy*50-50);
+      ctx.moveTo(jx*50-50,jy*50-50);
+      ctx.lineTo(jx*50,jy*50);
+
+      ctx.strokeStyle="red";
+      ctx.stroke(); 
+    }   
+}
+
+if ("comps_turn_x" in sessionStorage){//rysuje kola postawione wczesniej
+  var retrievedData_x = sessionStorage.getItem("comps_turn_x");
+  var comps_turn_x = JSON.parse(retrievedData_x);
+  var m = comps_turn_x.length;
+  
+  var retrievedData_y = sessionStorage.getItem("comps_turn_y");
+  var comps_turn_y = JSON.parse(retrievedData_y);
+  var n = comps_turn_y.length;
+  for (i = 0; i < m; i++){
+    for (j = 0; j < n; j++){
+      var jx = comps_turn_x[i];
+      var jy = comps_turn_y[i];
+      var x_circle = jx*50-25;
+      var y_circle = jy*50-25;
+      ctx.beginPath();
+      ctx.arc(x_circle, y_circle , 25, 0, 2 * Math.PI);
+      ctx.strokeStyle="blue";
+      ctx.stroke(); 
+    }   
+  }
+}
+
+
+canvas.addEventListener("click", handleClick, false);
+
+function handleClick(e){//zdarzenie w nastepstwie klikniecia
+  if ("players_turn_x" in sessionStorage){
+    var retrievedData_x = sessionStorage.getItem("players_turn_x");
+    players_turn_x = JSON.parse(retrievedData_x);
+    var m = players_turn_x.length;
+  
+    var retrievedData_y = sessionStorage.getItem("players_turn_y");
+    players_turn_y = JSON.parse(retrievedData_y);
+    var n = players_turn_y.length;
+
+    var x = Math.floor(e.offsetX/50)+1;
+    var y = Math.floor(e.offsetY/50)+1;
+    var konflikt = 0;
+    for (i = 0; i < m; i++){
+      
+      if (x == players_turn_x[i] && y == players_turn_y[i] ){
+        var konflikt = 1;
+      }
+      if (x == comps_turn_x[i] && y == comps_turn_y[i] ){
+        var konflikt = 1;
+      }
+    }
+    if (konflikt ===  0){
+      ctx.beginPath();
+      ctx.moveTo(x*50-50,y*50);
+      ctx.lineTo(x*50,y*50-50);
+      ctx.moveTo(x*50-50,y*50-50);
+      ctx.lineTo(x*50,y*50);
+
+      ctx.strokeStyle="red";
+      ctx.stroke();
+      var z = x*100 + y;
+  
+      players_turn_x[m] = x;
+      sessionStorage.setItem("players_turn_x",JSON.stringify(players_turn_x));
+      players_turn_y[n] = y;
+      sessionStorage.setItem("players_turn_y",JSON.stringify(players_turn_y));
+      location.assign(z);
+    }   
+  }
+  else{      
+    var x = Math.floor(e.offsetX/50)+1;
+    var y = Math.floor(e.offsetY/50)+1;
+    ctx.beginPath();
+    ctx.moveTo(x*50-50,y*50);
+    ctx.lineTo(x*50,y*50-50);
+    ctx.moveTo(x*50-50,y*50-50);
+    ctx.lineTo(x*50,y*50);
+
+    ctx.strokeStyle="red";
+    ctx.stroke();
+    var z = x*100 + y;
+
+    players_turn_x = [];
+    players_turn_x[0] = x;
+    sessionStorage.setItem("players_turn_x",JSON.stringify(players_turn_x));
+
+    players_turn_y = [];
+    players_turn_y[0] = y;
+    sessionStorage.setItem("players_turn_y",JSON.stringify(players_turn_y));
+    location.assign(z);   
+  } 
+}
+var content = document.getElementById("content");//odczytuje ruch komputera i rysuje kolo
+content.style.color = 'white';
+content = content.innerHTML;
+if (content > 10000){
+  content = content/100;
+  alert("Komputer wygral");
+}
+if (content == "Gracz wygral"){
+  alert("Gracz wygral");
+}
+if (content == "Wybrano poziom"){
+  alert("Wybrano poziom");
+} 
+var r = Number(content);
+r = r/100;
+var y_c = (r*100)%100;
+var x_c = (r*100-y_c)/100;
+var x_circle = x_c*50-25;
+var y_circle = y_c*50-25;//nr kolumny
+ctx.beginPath();
+ctx.arc(x_circle, y_circle , 25, 0, 2 * Math.PI);
+ctx.strokeStyle="black";
+ctx.stroke();
+
+
+
+if ("comps_turn_x" in sessionStorage){//ustawia ruch komputera w storage
+  var retrievedData_x = sessionStorage.getItem("comps_turn_x");
+  var comps_turn_x = JSON.parse(retrievedData_x);
+  var m = comps_turn_x.length;
+  comps_turn_x[m] = x_c;
+  sessionStorage.setItem("comps_turn_x",JSON.stringify(comps_turn_x));
+
+  var retrievedData_y = sessionStorage.getItem("comps_turn_y");
+  var comps_turn_y = JSON.parse(retrievedData_y);
+  var n = comps_turn_y.length;
+  comps_turn_y[n] = y_c;
+  sessionStorage.setItem("comps_turn_y",JSON.stringify(comps_turn_y));
+}
+else{
+  var comps_turn_x = [];
+  comps_turn_x[0] = x_c;
+  sessionStorage.setItem("comps_turn_x",JSON.stringify(comps_turn_x));
+
+  var comps_turn_y = [];
+  comps_turn_y[0] = y_c;
+  sessionStorage.setItem("comps_turn_y",JSON.stringify(comps_turn_y));
+}
+
+
+
+
+
+</script>
+
+
+  
+    </body>
+</html>
