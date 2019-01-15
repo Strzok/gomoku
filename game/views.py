@@ -35,7 +35,7 @@ def result(request, number):
         try:
             g = Difficulty_level.objects.get(ip = client_ip)
         except Difficulty_level.DoesNotExist:
-	    h = Difficulty_level(ip = client_ip, level_in_model = '3')
+            h = Difficulty_level(ip = client_ip, level_in_model = '3')
             h.save()
                 
    
