@@ -132,10 +132,6 @@ def result(request, number):
             list_ox[i] = int(list_ox[i])  
         for i in range(1,len(list_oy)):#wypelnia tabg Oami w polach w ktorych kolko postawil komp
         	tabg[list_oy[i]][list_ox[i]] = 'O'
-        print (tabg) 
-
-
-
 
         komputer_rozpoczyna = False
         a = False
