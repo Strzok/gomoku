@@ -150,13 +150,13 @@ def result(request, number):
             for j in range(liczba_pol):
     	        if tabg[i][j]=='X' and tabg[i][j+1]=='X' and tabg[i][j+2]=='X' and tabg[i][j+3]=='X' and tabg[i][j+4]=='X':
                     wygrana_gracza = True
-              	if tabg[i][j]=='X' and tabg[i+1][j+1]=='X' and tabg[i+2][j+2]=='X' and tabg[i+3][j+3]=='X' and tabg[i+4][j+4]=='X':        
+                if tabg[i][j]=='X' and tabg[i+1][j+1]=='X' and tabg[i+2][j+2]=='X' and tabg[i+3][j+3]=='X' and tabg[i+4][j+4]=='X':        
                     wygrana_gracza = True
                 if tabg[i][j]=='X' and tabg[i+1][j]=='X' and tabg[i+2][j]=='X' and tabg[i+3][j]=='X' and tabg[i+4][j]=='X':
                     wygrana_gracza = True
                 if j>3:
                     if tabg[i][j]=='X' and tabg[i+1][j-1]=='X' and tabg[i+2][j-2]=='X' and tabg[i+3][j-3]=='X' and tabg[i+4][j-4]=='X':
-               	        wygrana_gracza = True
+                        wygrana_gracza = True
  
         if a==a and wygrana_gracza == False:
             if a==a:
@@ -224,107 +224,107 @@ def result(request, number):
                         for i in range(liczba_pol):
             	            for j in range(liczba_pol):
                                 for k in range(54):
-                        	    if tabk[k][8]=='Q':
-                                        waga = 3750000
-                                    elif tabk[k][8]=='W':
-                                        waga = 750000
+                                if tabk[k][8]=='Q':
+                                    waga = 3750000
+                                elif tabk[k][8]=='W':
+                                    waga = 750000
                         	    elif tabk[k][8]=='E':
-                                        waga = 150000
-            	                    elif tabk[k][8]=='R' and level == '4':
-                                        waga = 30000
+                                    waga = 150000
+            	                elif tabk[k][8]=='R' and level == '4':
+                                    waga = 30000
                 	            elif tabk[k][8]=='T' and level == '4':
-                                        waga = 3000
-                                    elif tabk[k][8]=='Y' and level == '4':
-                                        waga = 300
-                                    elif tabk[k][8]=='U' and level == '4':
-                                        waga = 30
-                            	    elif tabk[k][8]=='I' and level == '4':
-                                        waga = 3
+                                    waga = 3000
+                                elif tabk[k][8]=='Y' and level == '4':
+                                    waga = 300
+                                elif tabk[k][8]=='U' and level == '4':
+                                    waga = 30
+                                elif tabk[k][8]=='I' and level == '4':
+                                    waga = 3
                         	    elif tabk[k][8]=='O' and level == '4':
-                                        waga = 2
-                                    elif tabk[k][8]=='U' and level == '3':
-                                        waga = 1
-                            	    elif tabk[k][8]=='I' and level == '3':
-                                        waga = 1
+                                    waga = 2
+                                elif tabk[k][8]=='U' and level == '3':
+                                    waga = 1
+                                elif tabk[k][8]=='I' and level == '3':
+                                    waga = 1
                         	    elif tabk[k][8]=='O' and level == '3':
-                                        waga = 1
-                                    elif tabk[k][8]=='Y' and level == '2':
-                                        waga = 1
-                                    elif tabk[k][8]=='U' and level == '2':
-                                        waga = 1
-                            	    elif tabk[k][8]=='I' and level == '2':
-                                        waga = 1
+                                    waga = 1
+                                elif tabk[k][8]=='Y' and level == '2':
+                                    waga = 1
+                                elif tabk[k][8]=='U' and level == '2':
+                                    waga = 1
+                            	elif tabk[k][8]=='I' and level == '2':
+                                    waga = 1
                         	    elif tabk[k][8]=='O' and level == '2':
-                                        waga = 1
-                       	            elif tabk[k][8]=='E' and level == '1':
-                                        waga = 1
-            	                    elif tabk[k][8]=='R' and level == '1':
-                                        waga = 1
+                                    waga = 1
+                       	        elif tabk[k][8]=='E' and level == '1':
+                                    waga = 1
+            	                elif tabk[k][8]=='R' and level == '1':
+                                    waga = 1
                 	            elif tabk[k][8]=='T' and level == '1':
-                                        waga = 1
-                                    elif tabk[k][8]=='Y' and level == '1':
-                                        waga = 1
-                                    elif tabk[k][8]=='U' and level == '1':
-                                        waga = 1
-                            	    elif tabk[k][8]=='I'and level == '1':
-                                        waga = 2
+                                    waga = 1
+                                elif tabk[k][8]=='Y' and level == '1':
+                                    waga = 1
+                                elif tabk[k][8]=='U' and level == '1':
+                                    waga = 1
+                            	elif tabk[k][8]=='I'and level == '1':
+                                    waga = 2
                         	    elif tabk[k][8]=='O'and level == '1':
-                                        waga = 2
-                               	    elif tabk[k][8]=='P':
-                                        waga = 1
+                                    waga = 2
+                               	elif tabk[k][8]=='P':
+                                    waga = 1
                         	    else:
-                                        waga = 0
+                                    waga = 0
 
                         	    if tabg[i][j]==tabk[k][l] and tabg[i][j+1]==tabk[k][l+1] and tabg[i][j+2]==tabk[k][l+2] and tabg[i][j+3]==tabk[k][l+3] and tabg[i][j+4]==tabk[k][l+4]:
-                                        if tabk[k][6]=='0':
-                                    	    tabl[i][j] = tabl[i][j] + waga
-                                        elif tabk[k][6]=='1':
+                                    if tabk[k][6]=='0':
+                                   	    tabl[i][j] = tabl[i][j] + waga
+                                    elif tabk[k][6]=='1':
                                 	    tabl[i][j+1] = tabl[i][j+1] + waga
-                                        elif tabk[k][6]=='2':
-                                       	    tabl[i][j+2] = tabl[i][j+2] + waga
-                                        elif tabk[k][6]=='3':
+                                    elif tabk[k][6]=='2':
+                                       	tabl[i][j+2] = tabl[i][j+2] + waga
+                                    elif tabk[k][6]=='3':
                                 	    tabl[i][j+3] = tabl[i][j+3] + waga
-                                        elif tabk[k][6]=='4':
-                                            tabl[i][j+4] = tabl[i][j+4] + waga
-                                    if tabg[i][j]==tabk[k][l] and tabg[i+1][j+1]==tabk[k][l+1] and tabg[i+2][j+2]==tabk[k][l+2] and tabg[i+3][j+3]==tabk[k][l+3] and tabg[i+4][j+4]==tabk[k][l+4]:	
-                                        if tabk[k][6]=='0':
+                                    elif tabk[k][6]=='4':
+                                        tabl[i][j+4] = tabl[i][j+4] + waga
+                                if tabg[i][j]==tabk[k][l] and tabg[i+1][j+1]==tabk[k][l+1] and tabg[i+2][j+2]==tabk[k][l+2] and tabg[i+3][j+3]==tabk[k][l+3] and tabg[i+4][j+4]==tabk[k][l+4]:	
+                                    if tabk[k][6]=='0':
                 	                    tabl[i][j] = tabl[i][j] + waga
-                                        elif tabk[k][6]=='1':
-                                       	    tabl[i+1][j+1] = tabl[i+1][j+1] + waga
-                                        elif tabk[k][6]=='2':
-                                       	    tabl[i+2][j+2] = tabl[i+2][j+2] + waga
-                                        elif tabk[k][6]=='3':
+                                    elif tabk[k][6]=='1':
+                                       	tabl[i+1][j+1] = tabl[i+1][j+1] + waga
+                                    elif tabk[k][6]=='2':
+                                       	tabl[i+2][j+2] = tabl[i+2][j+2] + waga
+                                    elif tabk[k][6]=='3':
                                 	    tabl[i+3][j+3] = tabl[i+3][j+3] + waga
-                                        elif tabk[k][6]=='4':
+                                    elif tabk[k][6]=='4':
                                 	    tabl[i+4][j+4] = tabl[i+4][j+4] + waga
             
-                            	    if tabg[i][j]==tabk[k][l] and tabg[i+1][j]==tabk[k][l+1] and tabg[i+2][j]==tabk[k][l+2] and tabg[i+3][j]==tabk[k][l+3] and tabg[i+4][j]==tabk[k][l+4]:
-                                        if tabk[k][6]=='0':
-                                	    tabl[i][j] = tabl[i][j] + waga
-                                        elif tabk[k][6]=='1':
-                    	                    tabl[i+1][j] = tabl[i+1][j] + waga
-                                        elif tabk[k][6]=='2':
+                            	if tabg[i][j]==tabk[k][l] and tabg[i+1][j]==tabk[k][l+1] and tabg[i+2][j]==tabk[k][l+2] and tabg[i+3][j]==tabk[k][l+3] and tabg[i+4][j]==tabk[k][l+4]:
+                                    if tabk[k][6]=='0':
+                                        tabl[i][j] = tabl[i][j] + waga
+                                    elif tabk[k][6]=='1':
+                    	                tabl[i+1][j] = tabl[i+1][j] + waga
+                                    elif tabk[k][6]=='2':
                                 	    tabl[i+2][j] = tabl[i+2][j] + waga
-                                        elif tabk[k][6]=='3':
-                                       	    tabl[i+3][j] = tabl[i+3][j] + waga
-                                        elif tabk[k][6]=='4':
-                                	    tabl[i+4][j] = tabl[i+4][j] + waga	
-    	                            if j>3:
-                		        if tabg[i][j]==tabk[k][l] and tabg[i+1][j-1]==tabk[k][l+1] and tabg[i+2][j-2]==tabk[k][l+2] and tabg[i+3][j-3]==tabk[k][l+3] and tabg[i+4][j-4]==tabk[k][l+4]:	
+                                    elif tabk[k][6]=='3':
+                                       	tabl[i+3][j] = tabl[i+3][j] + waga
+                                    elif tabk[k][6]=='4':
+                                	        tabl[i+4][j] = tabl[i+4][j] + waga	
+    	                        if j>3:
+                		            if tabg[i][j]==tabk[k][l] and tabg[i+1][j-1]==tabk[k][l+1] and tabg[i+2][j-2]==tabk[k][l+2] and tabg[i+3][j-3]==tabk[k][l+3] and tabg[i+4][j-4]==tabk[k][l+4]:	
                                 	    if tabk[k][6]=='0':
-                                                tabl[i][j] = tabl[i][j] + waga
+                                            tabl[i][j] = tabl[i][j] + waga
                                 	    elif tabk[k][6]=='1':
-                                                tabl[i+1][j-1] = tabl[i+1][j-1] + waga
+                                            tabl[i+1][j-1] = tabl[i+1][j-1] + waga
                                 	    elif tabk[k][6]=='2':
-                                                tabl[i+2][j-2] = tabl[i+2][j-2] + waga
+                                            tabl[i+2][j-2] = tabl[i+2][j-2] + waga
                                 	    elif tabk[k][6]=='3':
-                                                tabl[i+3][j-3] = tabl[i+3][j-3] + waga
+                                            tabl[i+3][j-3] = tabl[i+3][j-3] + waga
                                 	    elif tabk[k][6]=='4':
-                                                tabl[i+4][j-4] = tabl[i+4][j-4] + waga    
+                                            tabl[i+4][j-4] = tabl[i+4][j-4] + waga    
                         for i in range(liczba_pol):
         	            for j in range(liczba_pol):
-                                if tabl[i][j]>tabl[imax][jmax]:
-                                    imax = i
+                            if tabl[i][j]>tabl[imax][jmax]:
+                                imax = i
                         	    jmax = j
     	                tabg[imax][jmax] = 'O'
 
@@ -337,7 +337,7 @@ def result(request, number):
                                 if tabg[i][j]=='O' and tabg[i+1][j]=='O' and tabg[i+2][j]=='O' and tabg[i+3][j]=='O' and tabg[i+4][j]=='O':
                             	    wygrana_komputera = True
                                 if j>3:
-                        	    if tabg[i][j]=='O' and tabg[i+1][j-1]=='O' and tabg[i+2][j-2]=='O' and tabg[i+3][j-3]=='O' and tabg[i+4][j-4]=='O':
+                        	        if tabg[i][j]=='O' and tabg[i+1][j-1]=='O' and tabg[i+2][j-2]=='O' and tabg[i+3][j-3]=='O' and tabg[i+4][j-4]=='O':
                                         wygrana_komputera = True
                     
                         list_ox.append(jmax)
