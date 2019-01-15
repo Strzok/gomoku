@@ -16,7 +16,7 @@ def result(request, number):
     client_ip = request.META.get("REMOTE_ADDR")#pobiera ip
     result = 759
     if number == 'size10' or number == 'size15' or number == 'size20' or number == 'size25' :
-        print "zmiana poziomu"
+        print ("zmiana poziomu")
  
 
         number = '0'
@@ -81,11 +81,11 @@ def result(request, number):
         list_xx = list_xx.split(' ')
         list_xy = list_xy.split(' ')
 
-        print list_ox[0]
-        print type(list_ox) 
-        print list_ox
-        print list_xx
-        print coord_o.coord_ox[1:4]
+        print (list_ox[0])
+        print (type(list_ox)) 
+        print (list_ox)
+        print (list_xx)
+        print (coord_o.coord_ox[1:4])
         result = 548
         number = float(number)
         rest_of_modulo_of_number = number%1
@@ -96,8 +96,8 @@ def result(request, number):
             h = Difficulty_level(ip = client_ip, level_in_model = level)
             h.save()
 
-        print "level:" + level
-        print number
+        print ("level:" + level)
+        print (number)
         number = number - (number%1)
         kolumna = number%100
         wiersz = (number-kolumna)/100
@@ -115,7 +115,7 @@ def result(request, number):
             list_xx[i] = int(list_xx[i])  
         for i in range(1,len(list_xy)):#wypelnia tabg Xami w polach w ktorych krzyzyk postawil zawodnik
         	tabg[list_xy[i]][list_xx[i]] = 'X'
-        print tabg
+        print (tabg)
         if list_xx:
             list_xx.append(kolumna)#dodaje wspolrz ostaiego ruchu gracza do list
             list_xy.append(wiersz)
@@ -132,7 +132,7 @@ def result(request, number):
             list_ox[i] = int(list_ox[i])  
         for i in range(1,len(list_oy)):#wypelnia tabg Oami w polach w ktorych kolko postawil komp
         	tabg[list_oy[i]][list_ox[i]] = 'O'
-        print tabg 
+        print (tabg) 
 
 
 
@@ -347,9 +347,9 @@ def result(request, number):
                         p = Coord_o(ip = client_ip, coord_ox = list_ox, coord_oy = list_oy)
                         p.save()
                         p.coord_ox
-                        print imax
-                        print list_ox
-                        print p.coord_ox
+                        print (imax)
+                        print (list_ox)
+                        print (p.coord_ox)
                         imax = imax + 1
                         jmax = jmax + 1
                         result = imax * 100 + jmax
@@ -364,78 +364,5 @@ def result(request, number):
 
     return render(request, 'game/index.html',{'content':result})
 
-'''Traceback (most recent call last):
-  File "start.py", line 226, in <module>
-    orders = client.get_open_orders(symbol=symbol_couple)
-  File "/home/strzok/python-binance-master/binance/client.py", line 1402, in get_open_orders
-Traceback (most recent call last):
-  File "start8.py", line 227, in <module>
-    orders = client.get_open_orders(symbol=symbol_couple)
-  File "/home/strzok/python-binance-master/binance/client.py", line 1402, in get_open_orders
-byl
-byl
-byl
-        return self._get('openOrders', True, data=params)
-  File "/home/strzok/python-binance-master/binance/client.py", line 205, in _get
-    return self._request_api('get', path, signed, version, **kwargs)
-return self._get('openOrders', True, data=params)
-  File "/home/strzok/python-binance-master/binance/client.py", line 179, in _request_api
-  File "/home/strzok/python-binance-master/binance/client.py", line 205, in _get
-        return self._request_api('get', path, signed, version, **kwargs)
-return self._request(method, uri, signed, **kwargs)
-  File "/home/strzok/python-binance-master/binance/client.py", line 179, in _request_api
-  File "/home/strzok/python-binance-master/binance/client.py", line 174, in _request
-        return self._request(method, uri, signed, **kwargs)
-return self._handle_response(response)
-  File "/home/strzok/python-binance-master/binance/client.py", line 174, in _request
-  File "/home/strzok/python-binance-master/binance/client.py", line 198, in _handle_response
-    return self._handle_response(response)
-      File "/home/strzok/python-binance-master/binance/client.py", line 198, in _handle_response
-raise BinanceAPIException(response)
-    raise BinanceAPIException(response)
-binance.exceptions.BinanceAPIException: APIError(code=-1021): Timestamp for this request is outside of the recvWindow.
-binance.exceptions.BinanceAPIException: APIError(code=-1021): Timestamp for this request is outside of the recvWindow.
-Traceback (most recent call last):
-  File "start5.py", line 227, in <module>
-Traceback (most recent call last):
-  File "start7.py", line 227, in <module>
-Traceback (most recent call last):
-  File "start3.py", line 227, in <module>
-    orders = client.get_open_orders(symbol=symbol_couple)
-  File "/home/strzok/python-binance-master/binance/client.py", line 1402, in get_open_orders
-    orders = client.get_open_orders(symbol=symbol_couple)
-  File "/home/strzok/python-binance-master/binance/client.py", line 1402, in get_open_orders
-    orders = client.get_open_orders(symbol=symbol_couple)
-  File "/home/strzok/python-binance-master/binance/client.py", line 1402, in get_open_orders
-    return self._get('openOrders', True, data=params)
-  File "/home/strzok/python-binance-master/binance/client.py", line 205, in _get
-    return self._get('openOrders', True, data=params)
-  File "/home/strzok/python-binance-master/binance/client.py", line 205, in _get
-    return self._request_api('get', path, signed, version, **kwargs)
-  File "/home/strzok/python-binance-master/binance/client.py", line 179, in _request_api
-    return self._request_api('get', path, signed, version, **kwargs)
-  File "/home/strzok/python-binance-master/binance/client.py", line 179, in _request_api
-    return self._request(method, uri, signed, **kwargs)
-  File "/home/strzok/python-binance-master/binance/client.py", line 174, in _request
-    return self._request(method, uri, signed, **kwargs)
-  File "/home/strzok/python-binance-master/binance/client.py", line 174, in _request
-    return self._handle_response(response)
-  File "/home/strzok/python-binance-master/binance/client.py", line 198, in _handle_response
-    return self._handle_response(response)
-  File "/home/strzok/python-binance-master/binance/client.py", line 198, in _handle_response
-    raise BinanceAPIException(response)
-    raise BinanceAPIException(response)
-    return self._get('openOrders', True, data=params)
-  File "/home/strzok/python-binance-master/binance/client.py", line 205, in _get
-    return self._request_api('get', path, signed, version, **kwargs)
-  File "/home/strzok/python-binance-master/binance/client.py", line 179, in _request_api
-    return self._request(method, uri, signed, **kwargs)
-  File "/home/strzok/python-binance-master/binance/client.py", line 174, in _request
-    return self._handle_response(response)
-  File "/home/strzok/python-binance-master/binance/client.py", line 198, in _handle_response
-    raise BinanceAPIException(response)
-binance.exceptions.BinanceAPIException: APIError(code=-1021): Timestamp for this request is outside of the recvWindow.
-binance.exceptions.BinanceAPIExceptionbinance.exceptions.BinanceAPIException: APIError(code=-1021): Timestamp for this request is outside of the recvWindow.
-: APIError(code=-1021): Timestamp for this request is outside of the recvWindow.
-strzok@strzok-945GZM-S2:~/python-binance-master$ '''
+
 
