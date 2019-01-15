@@ -150,7 +150,7 @@ def result(request, number):
             for j in range(liczba_pol):
     	        if tabg[i][j]=='X' and tabg[i][j+1]=='X' and tabg[i][j+2]=='X' and tabg[i][j+3]=='X' and tabg[i][j+4]=='X':
                     wygrana_gracza = True
-                if tabg[i][j]=='X' and tabg[i+1][j+1]=='X' and tabg[i+2][j+2]=='X' and tabg[i+3][j+3]=='X' and tabg[i+4][j+4]=='X':        
+                if tabg[i][j]=='X' and tabg[i+1][j+1]=='X' and tabg[i+2][j+2]=='X' and tabg[i+3][j+3]=='X' and tabg[i+4][j+4]=='X':
                     wygrana_gracza = True
                 if tabg[i][j]=='X' and tabg[i+1][j]=='X' and tabg[i+2][j]=='X' and tabg[i+3][j]=='X' and tabg[i+4][j]=='X':
                     wygrana_gracza = True
