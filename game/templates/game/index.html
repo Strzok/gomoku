@@ -1,10 +1,10 @@
 <html>
     <head>
-        <title>Tablica przyciskow</title>
+        <title>Gomoku</title>
     <script type="text/javascript">
-size = 15;
-
+    var size;
     </script>
+
 <style>
 .dropbtn {
     background-color: #f1f1f1;
@@ -14,6 +14,11 @@ size = 15;
     min-width: 160px;
     border: none;
     cursor: pointer;
+    text-align: center;
+    margin: 10px 40px; 
+    position:relative;
+
+ 
 }
 
 .dropbtn:hover, .dropbtn:focus {
@@ -49,7 +54,7 @@ size = 15;
     </head>
 
     <body>
-        <p>Witaj</p>
+       
    </br>
 <p id="content">{{content}}</p>
 <p id=komunikat>{{komunikat}}</p>
@@ -61,32 +66,31 @@ size = 15;
 
       value="Nowa gra"
 
-      onclick="location.assign(0);sessionStorage.clear()"
+      onclick="newGame()"
       
     />
 
 
  <div class="dropdown">
-  <button onclick="myFunction()" class="dropbtn">Poziom trudnosci</button>
+  <button onclick="myFunction()" class="dropbtn">Poziom trudności</button>
   <div id="myDropdown" class="dropdown-content">
-    <button onclick="location.assign(0.1)"class="dropbtn">Bardzo latwy</button>
-    <button onclick="location.assign(0.2)"class="dropbtn">Latwy</button>
-    <button onclick="location.assign(0.3)"class="dropbtn">Sredni</button>
+    <button onclick="location.assign(0.1)"class="dropbtn">Bardzo łatwy</button>
+    <button onclick="location.assign(0.2)"class="dropbtn">Łatwy</button>
+    <button onclick="location.assign(0.3)"class="dropbtn">Średni</button>
     <button onclick="location.assign(0.4)"class="dropbtn">Trudny</button>    
   </div>
 </div> 
 
-
-<!-- <div class="dropdown">
-  <button onclick="sizeFunction()" class="dropbtn">Wielkosc planszy</button>
+ <div class="dropdown">
+  <button onclick="sizeFunction()" class="dropbtn">Wielkość planszy</button>
   <div id="sizeDropdown" class="dropdown-content">
-   <button onclick="sizeF()"class="dropbtn">10</button>
-   <button onclick="location.assign('size15');sessionStorage.clear()"class="dropbtn">15</button>
-   <button onclick="location.assign('size20');sessionStorage.clear()"class="dropbtn">20</button>
-   <button onclick="location.assign('size25');sessionStorage.clear()"class="dropbtn">25</button>    
+   <button onclick="sizeF(10)"class="dropbtn">10</button>
+   <button onclick="sizeF(15)"class="dropbtn">15</button>
+   <button onclick="sizeF(20)"class="dropbtn">20</button>
+   <button onclick="sizeF(25)"class="dropbtn">25</button>    
   </div>
 </div> 
--->
+
 
 
 </br>
@@ -98,6 +102,14 @@ size = 15;
 <script>
 
 
+function newGame() {
+
+  size=15;//default value
+  sessionStorage.clear()
+  sessionStorage.setItem("size",JSON.stringify(size));
+  location.assign('size' + size); 
+}  
+
 function myFunction() {
     document.getElementById("myDropdown").classList.toggle("show");
 }
@@ -106,10 +118,26 @@ function sizeFunction() {
     
 }
 
+function langFunction() {
+    document.getElementById("langDropdown").classList.toggle("show");
+    
+}
 
+function langF(language){
+}
 
+function _(s) {
+  words = [["new game","nuevo juego","nowa gra"],
+           ["difficulty level", "nivel de dificultad", "poziom trudnosci"]]
 
-
+  if (language = es) {
+    for (i = 0; i<3; i++) {
+      if (words[i,0] = s) {
+        return words [i,1];
+      }
+    }
+  }
+}
 
 // Close the dropdown if the user clicks outside of it
 window.onclick = function(event) {
@@ -126,13 +154,30 @@ window.onclick = function(event) {
   }
 }
 
-function sizeF() {
+function sizeF(size) {
 
-  location.assign('size10');
+
   sessionStorage.clear();
-  size = 15;
-  
+  //size = 10;
+  alert("Zmiana");
+  sessionStorage.setItem("size",JSON.stringify(size));
+  location.assign('size' + size); 
 }
+
+
+var content = document.getElementById("content");
+content.style.color = 'white';
+content = content.innerHTML;
+
+if (content == "size10"){
+  size = 10;
+  alert("uruchamia sie");
+}
+else {
+  var retrievedData_size = sessionStorage.getItem("size");
+  size = JSON.parse(retrievedData_size);
+}
+
 
 var canvas = document.getElementById("plansza");
 var ctx = canvas.getContext("2d");
@@ -166,13 +211,10 @@ ctx.strokeStyle="green";
 ctx.stroke();
 }
 
-
-
-
 var players_turn_x;
 var players_turn_y;
 
-if ("players_turn_x" in sessionStorage){//rysuje krzyzyki postawione wczesniej
+if ("players_turn_x" in sessionStorage){//it draws crosses placed earlier
   var retrievedData_x = sessionStorage.getItem("players_turn_x");
   players_turn_x = JSON.parse(retrievedData_x);
   var m = players_turn_x.length;
@@ -195,7 +237,7 @@ if ("players_turn_x" in sessionStorage){//rysuje krzyzyki postawione wczesniej
     }   
 }
 
-if ("comps_turn_x" in sessionStorage){//rysuje kola postawione wczesniej
+if ("comps_turn_x" in sessionStorage){//it draws wheels placed earlier
   var retrievedData_x = sessionStorage.getItem("comps_turn_x");
   var comps_turn_x = JSON.parse(retrievedData_x);
   var m = comps_turn_x.length;
@@ -220,7 +262,7 @@ if ("comps_turn_x" in sessionStorage){//rysuje kola postawione wczesniej
 
 canvas.addEventListener("click", handleClick, false);
 
-function handleClick(e){//zdarzenie w nastepstwie klikniecia
+function handleClick(e){
   if ("players_turn_x" in sessionStorage){
     var retrievedData_x = sessionStorage.getItem("players_turn_x");
     players_turn_x = JSON.parse(retrievedData_x);
@@ -283,9 +325,8 @@ function handleClick(e){//zdarzenie w nastepstwie klikniecia
     location.assign(z);   
   } 
 }
-var content = document.getElementById("content");//odczytuje ruch komputera i rysuje kolo
-content.style.color = 'white';
-content = content.innerHTML;
+
+
 if (content > 10000){
   content = content/100;
   alert("Komputer wygral");
@@ -295,7 +336,8 @@ if (content == "Gracz wygral"){
 }
 if (content == "Wybrano poziom"){
   alert("Wybrano poziom");
-} 
+}
+ 
 var r = Number(content);
 r = r/100;
 var y_c = (r*100)%100;
@@ -309,7 +351,7 @@ ctx.stroke();
 
 
 
-if ("comps_turn_x" in sessionStorage){//ustawia ruch komputera w storage
+if ("comps_turn_x" in sessionStorage){
   var retrievedData_x = sessionStorage.getItem("comps_turn_x");
   var comps_turn_x = JSON.parse(retrievedData_x);
   var m = comps_turn_x.length;
